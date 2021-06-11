@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Scrap Stats Extension",
+    "version": "0.1",
+    "description": "Monitor any number in the Internet",
+    "action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html",
+        "default_title": "Scrap Stats"
+    },
+    "content_scripts": [{
+        "matches": [
+            "<all_urls>"
+        ],
+        "css": ["style.css"],
+        "js": ["content.js"]
+    }],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab"
+    ]
+}
