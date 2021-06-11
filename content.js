@@ -8,6 +8,8 @@ async function load_micro_popup() {
 
     document.querySelector("body").appendChild(newElement);
     document.getElementById("scrap-stats-popup").innerHTML = await (await fetch(micro_popup_url)).text();
+
+    document.getElementById("scrap-stats-popup").querySelector("#add-scraper").addEventListener("click", addScraper);
 }
 
 load_micro_popup();
@@ -41,7 +43,7 @@ function selectElement(event) {
 function modalFill(element) {
     let modalElement = document.getElementById("scrap-stats-popup");
     modalElement.querySelector("#url").innerHTML = location.href;
-    modalElement.querySelector("#title").innerHTML = document.title;
+    modalElement.querySelector("#name").innerHTML = document.title;
     modalElement.querySelector("#selector").innerHTML = finder(element);
     modalElement.querySelector("#value").innerHTML = element.innerHTML;
 }
@@ -81,4 +83,16 @@ function commandReceived(message, sender, sendResponse) {
     }
 
     sendResponse({ farewell: "Roger That" });
+}
+
+
+function addScraper() {
+    console.log("addScraper()");
+
+    let modalElement = document.getElementById("scrap-stats-popup");
+    let url = modalElement.querySelector("#url").innerHTML;
+    let name = modalElement.querySelector("#name").innerHTML;
+    let selector = modalElement.querySelector("#selector").innerHTML;
+
+    window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
 }
