@@ -1,4 +1,4 @@
-import { finder } from "./finder.js";
+import { finder } from "@medv/finder";
 
 document.addEventListener("mousedown", selectElement);
 
@@ -13,21 +13,22 @@ function selectElement(event) {
     last_element = element;
     console.log("element: " + element);
 
-    const selector = finder(element);
-    console.log("selector:", selector);
+    sendDataMessage(element);
 
     // element.style.color = "red";
     element.classList.add("scrap-stats-selected");
-
-    sendDataMessage(element);
 }
 
 function sendDataMessage(element) {
     console.log("sendDataMessage()");
+    let selector = finder(element);
 
     chrome.runtime.sendMessage({
         message: "Hello!",
-        value: element.innerHTML
+        url: location.href,
+        title: "The title",
+        value: element.innerHTML,
+        selector: selector
     }, function(response) {
         console.log("message response: ", response);
     });
