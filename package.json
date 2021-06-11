@@ -4,6 +4,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "@medv/finder": "^2.0.0"
+    "@medv/finder": "^2.0.0",
+    "micromodal": "^0.4.6"
   }
 }
