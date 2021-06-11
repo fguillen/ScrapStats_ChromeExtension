@@ -13,7 +13,7 @@
             "<all_urls>"
         ],
         "css": ["style.css"],
-        "js": ["content.js"]
+        "js": ["dist/bundle.js"]
     }],
     "background": {
         "service_worker": "background.js"

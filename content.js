@@ -1,4 +1,5 @@
-console.log("Scrap Stats Extension content.js loading ....");
+import { finder } from "./finder.js";
+
 document.addEventListener("mousedown", selectElement);
 
 var last_element = null;
@@ -11,6 +12,10 @@ function selectElement(event) {
     let element = event.target;
     last_element = element;
     console.log("element: " + element);
+
+    const selector = finder(element);
+    console.log("selector:", selector);
+
     // element.style.color = "red";
     element.classList.add("scrap-stats-selected");
 
