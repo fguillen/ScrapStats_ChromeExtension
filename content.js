@@ -1,10 +1,6 @@
 import { finder } from "@medv/finder";
 import MicroModal from "micromodal";
 
-document.addEventListener("mousedown", selectElement);
-
-
-
 
 async function load_micro_popup() {
     let newElement = new DOMParser().parseFromString('<div id="scrap-stats-popup"></div>', 'text/html').body.childNodes[0];
@@ -30,37 +26,59 @@ function selectElement(event) {
     last_element = element;
     console.log("element: " + element);
 
-    // sendDataMessage(element);
-
-    // element.style.color = "red";
-    element.classList.add("scrap-stats-selected");
-
+    modalFill(element);
 
     MicroModal.show("modal-1", {
-        onShow: modal => console.info(`${modal.id} is shown`), // [1]
-        onClose: modal => console.info(`${modal.id} is hidden`), // [2]
-        openTrigger: 'data-custom-open', // [3]
-        closeTrigger: 'data-custom-close', // [4]
-        openClass: 'is-open', // [5]
-        disableScroll: true, // [6]
-        disableFocus: false, // [7]
-        awaitOpenAnimation: false, // [8]
-        awaitCloseAnimation: false, // [9]
-        debugMode: true // [10]
+        onShow: modalShow,
+        onClose: modalClose,
+        debugMode: true
     });
+
+    deactivate();
+    element.classList.add("scrap-stats-selected");
 }
 
-// function sendDataMessage(element) {
-//     console.log("sendDataMessage()");
-//     let selector = finder(element);
+function modalFill(element) {
+    let modalElement = document.getElementById("scrap-stats-popup");
+    modalElement.querySelector("#url").innerHTML = location.href;
+    modalElement.querySelector("#title").innerHTML = document.title;
+    modalElement.querySelector("#selector").innerHTML = finder(element);
+    modalElement.querySelector("#value").innerHTML = element.innerHTML;
+}
 
-//     chrome.runtime.sendMessage({
-//         message: "Hello!",
-//         url: location.href,
-//         title: "The title",
-//         value: element.innerHTML,
-//         selector: selector
-//     }, function(response) {
-//         console.log("message response: ", response);
-//     });
-// }
+function modalShow(modal) {
+    deactivate();
+}
+
+function modalClose(modal) {
+    activate();
+}
+
+function activate() {
+    console.log("Scrap Stats Extension activated");
+    document.addEventListener("mousedown", selectElement);
+}
+
+function deactivate() {
+    console.log("Scrap Stats Extension deactivated");
+    document.removeEventListener("mousedown", selectElement);
+    if (last_element != null) {
+        last_element.classList.remove("scrap-stats-selected");
+    }
+}
+
+chrome.runtime.onMessage.addListener(commandReceived);
+
+function commandReceived(message, sender, sendResponse) {
+    console.log("commandReceived: ", message);
+
+    if (message.command == "activate") {
+        activate();
+    }
+
+    if (message.command == "deactivate") {
+        deactivate();
+    }
+
+    sendResponse({ farewell: "Roger That" });
+}
