@@ -2,6 +2,7 @@ import { finder } from "@medv/finder";
 import MicroModal from "micromodal";
 
 var last_element = null;
+var last_scraper_settings = null;
 var status = "deactivate";
 
 insertScrapStatsPopup();
@@ -60,10 +61,20 @@ function selectElement(event) {
 
 function modalFill(element) {
     let modalElement = document.getElementById("scrap-stats-popup");
-    modalElement.querySelector("#url").innerHTML = location.href;
-    modalElement.querySelector("#name").innerHTML = document.title;
-    modalElement.querySelector("#selector").innerHTML = finder(element);
-    modalElement.querySelector("#value").innerHTML = element.innerHTML.substring(0, 20);
+
+    last_scraper_settings = {
+        url: location.href,
+        name: document.title,
+        selector: finder(element),
+        value: element.innerHTML.substring(0, 20)
+    }
+
+    console.debug("ScrapStats :: Content.modalFill()", last_scraper_settings);
+
+    modalElement.querySelector("#url").innerHTML = last_scraper_settings.url;
+    modalElement.querySelector("#name").innerHTML = last_scraper_settings.name;
+    modalElement.querySelector("#selector").innerHTML = last_scraper_settings.selector;
+    modalElement.querySelector("#value").innerHTML = last_scraper_settings.value;
 }
 
 function modalShow(modal) {
@@ -75,7 +86,8 @@ function modalClose(modal) {
 }
 
 function activate() {
-    console.debug("Scrap Stats Extension activated");
+    console.debug("ScrapStats :: Content.activate()");
+
     document.addEventListener("mousedown", selectElement);
     document.addEventListener("mouseover", overElement);
 
@@ -83,7 +95,8 @@ function activate() {
 }
 
 function deactivate() {
-    console.debug("Scrap Stats Extension deactivated");
+    console.debug("ScrapStats :: Content.deactivate()");
+
     document.removeEventListener("mousedown", selectElement);
     document.removeEventListener("mouseover", overElement);
 
@@ -115,7 +128,7 @@ function commandReceived(message, sender, sendResponse) {
             break;
 
         default:
-            console.debug("ScrapStats :: commandReceived() :: command no supported", message.command);
+            console.debug("ScrapStats :: Content.commandReceived() :: command no supported", message.command);
             break;
     }
 
@@ -124,12 +137,9 @@ function commandReceived(message, sender, sendResponse) {
 }
 
 function addScraper() {
-    console.debug("addScraper()");
-
-    let modalElement = document.getElementById("scrap-stats-popup");
-    let name = modalElement.querySelector("#name").innerHTML;
-    let url = modalElement.querySelector("#url").innerHTML;
-    let selector = modalElement.querySelector("#selector").innerHTML;
+    let name = last_scraper_settings.name;
+    let url = last_scraper_settings.url;
+    let selector = last_scraper_settings.selector;
 
     name = encodeURIComponent(name)
     url = encodeURIComponent(url)
