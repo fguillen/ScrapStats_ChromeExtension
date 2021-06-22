@@ -904,8 +904,8 @@ function addScraper() {
     url = encodeURIComponent(url)
     selector = encodeURIComponent(selector)
 
-    // window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
-    window.open("http://localhost:3000/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
+    window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
+    // window.open("http://localhost:3000/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
 }
 
 /******/ })()
