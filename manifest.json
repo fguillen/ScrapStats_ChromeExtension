@@ -25,5 +25,10 @@
     "web_accessible_resources": [{
         "matches": ["<all_urls>"],
         "resources": ["add_scraper_popup.html", "add_scraper_popup.css", "icon.png"]
-    }]
+    }],
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    }
 }
