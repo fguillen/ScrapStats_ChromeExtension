@@ -791,6 +791,9 @@ window.MicroModal = MicroModal;
 
 
 var last_element = null;
+var content_status = "deactivate";
+
+insertScrapStatsPopup();
 
 async function insertScrapStatsPopup() {
     let newElement = new DOMParser().parseFromString('<div id="scrap-stats-popup"></div>', 'text/html').body.childNodes[0];
@@ -815,8 +818,6 @@ async function insertScrapStatsPopup() {
 
     micromodal_es.init();
 }
-
-insertScrapStatsPopup();
 
 function removeScrapStatsPopup() {
     document.getElementById("scrap-stats-popup").remove();
@@ -866,6 +867,8 @@ function activate() {
     console.debug("Scrap Stats Extension activated");
     document.addEventListener("mousedown", selectElement);
     document.addEventListener("mouseover", overElement);
+
+    content_status = "activate";
 }
 
 function deactivate() {
@@ -876,20 +879,37 @@ function deactivate() {
     if (last_element != null) {
         last_element.classList.remove("scrap-stats-selected");
     }
+
+    content_status = "deactivate";
 }
 
 chrome.runtime.onMessage.addListener(commandReceived);
 
 function commandReceived(message, sender, sendResponse) {
-    if (message.command == "activate") {
-        activate();
+    let result = null;
+
+    switch (message.command) {
+        case "activate":
+            activate();
+            result = "Roger That";
+            break;
+
+        case "deactivate":
+            deactivate();
+            result = "Roger That";
+            break;
+
+        case "status":
+            result = content_status;
+            break;
+
+        default:
+            console.debug("ScrapStats :: commandReceived() :: command no supported", message.command);
+            break;
     }
 
-    if (message.command == "deactivate") {
-        deactivate();
-    }
-
-    sendResponse({ farewell: "Roger That" });
+    sendResponse({ command: message.command, result: result });
+    return true;
 }
 
 function addScraper() {
