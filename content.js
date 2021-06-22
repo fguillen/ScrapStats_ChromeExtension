@@ -90,9 +90,13 @@ function addScraper() {
     console.log("addScraper()");
 
     let modalElement = document.getElementById("scrap-stats-popup");
-    let url = modalElement.querySelector("#url").innerHTML;
     let name = modalElement.querySelector("#name").innerHTML;
+    let url = modalElement.querySelector("#url").innerHTML;
     let selector = modalElement.querySelector("#selector").innerHTML;
+
+    name = encodeURIComponent(name)
+    url = encodeURIComponent(url)
+    selector = encodeURIComponent(selector)
 
     window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
 }
