@@ -2,13 +2,13 @@
   Basic Modal Styles
 \**************************/
 
-.modal {
+#scrap-stats-popup #scrap-stats-popup .modal {
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
     z-index: 1000;
     position: relative;
 }
 
-.modal__overlay {
+#scrap-stats-popup .modal__overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.modal__container {
+#scrap-stats-popup .modal__container {
     background-color: #fff;
     padding: 30px;
     max-width: 500px;
@@ -30,13 +30,13 @@
     box-sizing: border-box;
 }
 
-.modal__header {
+#scrap-stats-popup .modal__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal__title {
+#scrap-stats-popup .modal__title {
     margin-top: 0;
     margin-bottom: 0;
     font-weight: 600;
@@ -46,23 +46,23 @@
     box-sizing: border-box;
 }
 
-.modal__close {
+#scrap-stats-popup .modal__close {
     background: transparent;
     border: 0;
 }
 
-.modal__header .modal__close:before {
+#scrap-stats-popup .modal__header #scrap-stats-popup .modal__close:before {
     content: "\2715";
 }
 
-.modal__content {
+#scrap-stats-popup .modal__content {
     margin-top: 2rem;
     margin-bottom: 2rem;
     line-height: 1.5;
     color: rgba(0, 0, 0, .8);
 }
 
-.modal__btn {
+#scrap-stats-popup .modal__btn {
     font-size: .875rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -90,13 +90,13 @@
     transition: transform .25s ease-out, -webkit-transform .25s ease-out;
 }
 
-.modal__btn:focus,
-.modal__btn:hover {
+#scrap-stats-popup .modal__btn:focus,
+#scrap-stats-popup .modal__btn:hover {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
 }
 
-.modal__btn-primary {
+#scrap-stats-popup .modal__btn-primary {
     background-color: #00449e;
     color: #fff;
 }
@@ -142,39 +142,39 @@
     }
 }
 
-.micromodal-slide {
+#scrap-stats-popup .micromodal-slide {
     display: none;
 }
 
-.micromodal-slide.is-open {
+#scrap-stats-popup .micromodal-slide.is-open {
     display: block;
 }
 
-.micromodal-slide[aria-hidden="false"] .modal__overlay {
+#scrap-stats-popup .micromodal-slide[aria-hidden="false"] .modal__overlay {
     animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
-.micromodal-slide[aria-hidden="false"] .modal__container {
+#scrap-stats-popup .micromodal-slide[aria-hidden="false"] .modal__container {
     animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
 }
 
-.micromodal-slide[aria-hidden="true"] .modal__overlay {
+#scrap-stats-popup .micromodal-slide[aria-hidden="true"] .modal__overlay {
     animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
 }
 
-.micromodal-slide[aria-hidden="true"] .modal__container {
+#scrap-stats-popup .micromodal-slide[aria-hidden="true"] .modal__container {
     animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
 }
 
-.micromodal-slide .modal__container,
-.micromodal-slide .modal__overlay {
+#scrap-stats-popup .micromodal-slide .modal__container,
+#scrap-stats-popup .micromodal-slide .modal__overlay {
     will-change: transform;
 }
 
 
 /* icon */
 
-.modal__container {
+#scrap-stats-popup .modal__container {
     overflow: visible;
 }
 
@@ -193,4 +193,27 @@
     background-color: white;
     border-radius: 31px;
     padding: 10px;
+}
+
+
+/* content */
+
+#scrap-stats-popup .extra {
+    display: none;
+}
+
+#scrap-stats-popup .value {
+    text-align: center;
+    margin: 2em 0px;
+}
+
+#scrap-stats-popup .value span {
+    font-size: 2em;
+    padding: 0.5em 1em;
+    background-color: #d2b928;
+    border-radius: 10px;
+}
+
+#scrap-stats-popup .modal__container {
+    text-align: center;
 }

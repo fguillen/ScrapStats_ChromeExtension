@@ -9,15 +9,21 @@
                 <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
             </header>
             <main class="modal__content" id="modal-1-content">
-                <p>
-                    These will be the initial settings. You can always change them later:
-                </p>
-                <ul>
-                    <li>Name: <span id="name"></span></li>
-                    <li>Url: <span id="url"></span></li>
-                    <li>Selector: <span id="selector"></span></li>
-                    <li>Value: <span id="value"></span></li>
-                </ul>
+                <div class="value"><span id="value"></span></div>
+
+                <div class="extra">
+                    <p>
+                        These will be the initial settings. You can always change them later:
+                    </p>
+                    <dl>
+                        <dt>Name</dt>
+                        <dd id="name"></dd>
+                        <dt>Url</dt>
+                        <dd id="url"></dd>
+                        <dt>Selector</dt>
+                        <dd id="selector"></dd>
+                    </dl>
+                </div>
             </main>
             <footer class="modal__footer">
                 <button class="modal__btn modal__btn-primary" id="add-scraper">Add Scraper</button>

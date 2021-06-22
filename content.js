@@ -36,6 +36,8 @@ function overElement(event) {
 function selectElement(event) {
     let element = event.target;
 
+    deactivate();
+
     modalFill(element);
 
     MicroModal.show("modal-1", {
@@ -43,8 +45,6 @@ function selectElement(event) {
         onClose: modalClose,
         debugMode: true
     });
-
-    deactivate();
 }
 
 function modalFill(element) {
@@ -52,7 +52,7 @@ function modalFill(element) {
     modalElement.querySelector("#url").innerHTML = location.href;
     modalElement.querySelector("#name").innerHTML = document.title;
     modalElement.querySelector("#selector").innerHTML = finder(element);
-    modalElement.querySelector("#value").innerHTML = element.innerHTML;
+    modalElement.querySelector("#value").innerHTML = element.innerHTML.substring(0, 20);
 }
 
 function modalShow(modal) {
