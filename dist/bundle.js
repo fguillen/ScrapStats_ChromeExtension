@@ -839,7 +839,7 @@ function selectElement(event) {
 
     modalFill(element);
 
-    micromodal_es.show("modal-1", {
+    micromodal_es.show("scrap-stats-modal-1", {
         onShow: modalShow,
         onClose: modalClose,
         debugMode: true

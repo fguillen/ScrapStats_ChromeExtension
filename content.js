@@ -50,7 +50,7 @@ function selectElement(event) {
 
     modalFill(element);
 
-    MicroModal.show("modal-1", {
+    MicroModal.show("scrap-stats-modal-1", {
         onShow: modalShow,
         onClose: modalClose,
         debugMode: true
