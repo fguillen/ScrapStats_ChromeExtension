@@ -13,11 +13,7 @@ async function load_micro_popup() {
 
     // set icon image
     let iconImage = document.getElementById("scrap-stats-popup").querySelector(".icon > img");
-    console.log("iconImage 1: ", iconImage);
-    console.log("iconImage.src 1: ", iconImage.src);
     iconImage.src = chrome.runtime.getURL("icon.png");
-    console.log("iconImage 2: ", iconImage);
-    console.log("iconImage.src 2: ", iconImage.src);
 }
 
 load_micro_popup();
@@ -27,14 +23,18 @@ MicroModal.init();
 
 var last_element = null;
 
-function selectElement(event) {
+function overElement(event) {
     if (last_element != null) {
         last_element.classList.remove("scrap-stats-selected");
     }
 
     let element = event.target;
     last_element = element;
-    console.log("element: " + element);
+    element.classList.add("scrap-stats-selected");
+}
+
+function selectElement(event) {
+    let element = event.target;
 
     modalFill(element);
 
@@ -45,7 +45,6 @@ function selectElement(event) {
     });
 
     deactivate();
-    element.classList.add("scrap-stats-selected");
 }
 
 function modalFill(element) {
@@ -67,11 +66,14 @@ function modalClose(modal) {
 function activate() {
     console.log("Scrap Stats Extension activated");
     document.addEventListener("mousedown", selectElement);
+    document.addEventListener("mouseover", overElement);
 }
 
 function deactivate() {
     console.log("Scrap Stats Extension deactivated");
     document.removeEventListener("mousedown", selectElement);
+    document.removeEventListener("mouseover", overElement);
+
     if (last_element != null) {
         last_element.classList.remove("scrap-stats-selected");
     }
@@ -107,5 +109,5 @@ function addScraper() {
     selector = encodeURIComponent(selector)
 
     // window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
-    window.open("localhost:3000/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
+    window.open("http://localhost:3000/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
 }

@@ -1,3 +1,4 @@
 .scrap-stats-selected {
-    border: 1px solid deeppink;
+    -webkit-box-shadow: 0px 0px 11px 0px #EDD726;
+    box-shadow: 0px 0px 11px 0px #EDD726;
 }
