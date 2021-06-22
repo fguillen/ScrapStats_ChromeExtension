@@ -2,9 +2,9 @@
   Basic Modal Styles
 \**************************/
 
-#scrap-stats-popup #scrap-stats-popup .scrap-stats-modal {
+#scrap-stats-popup {
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
-    z-index: 1000;
+    z-index: 100000;
     position: relative;
 }
 
