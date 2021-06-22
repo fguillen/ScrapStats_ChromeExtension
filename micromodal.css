@@ -4,6 +4,8 @@
 
 .modal {
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+    z-index: 1000;
+    position: relative;
 }
 
 .modal__overlay {
@@ -167,4 +169,28 @@
 .micromodal-slide .modal__container,
 .micromodal-slide .modal__overlay {
     will-change: transform;
+}
+
+
+/* icon */
+
+.modal__container {
+    overflow: visible;
+}
+
+#scrap-stats-popup .icon {
+    position: absolute;
+    overflow: visible;
+    top: -49px;
+    left: 0px;
+    text-align: center;
+    height: 70px;
+    width: 100%;
+}
+
+#scrap-stats-popup .icon img {
+    height: 100%;
+    background-color: white;
+    border-radius: 31px;
+    padding: 10px;
 }

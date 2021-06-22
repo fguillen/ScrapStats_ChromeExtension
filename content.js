@@ -10,6 +10,14 @@ async function load_micro_popup() {
     document.getElementById("scrap-stats-popup").innerHTML = await (await fetch(micro_popup_url)).text();
 
     document.getElementById("scrap-stats-popup").querySelector("#add-scraper").addEventListener("click", addScraper);
+
+    // set icon image
+    let iconImage = document.getElementById("scrap-stats-popup").querySelector(".icon > img");
+    console.log("iconImage 1: ", iconImage);
+    console.log("iconImage.src 1: ", iconImage.src);
+    iconImage.src = chrome.runtime.getURL("icon.png");
+    console.log("iconImage 2: ", iconImage);
+    console.log("iconImage.src 2: ", iconImage.src);
 }
 
 load_micro_popup();
@@ -98,5 +106,6 @@ function addScraper() {
     url = encodeURIComponent(url)
     selector = encodeURIComponent(selector)
 
-    window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
+    // window.open("https://scrapstats.com/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
+    window.open("localhost:3000/front/scrapers/new?name=" + name + "&url=" + url + "&selector=" + selector);
 }

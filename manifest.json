@@ -24,6 +24,6 @@
     ],
     "web_accessible_resources": [{
         "matches": ["<all_urls>"],
-        "resources": ["micro_popup.html"]
+        "resources": ["micro_popup.html", "icon.png"]
     }]
 }
