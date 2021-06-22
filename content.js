@@ -5,15 +5,24 @@ var last_element = null;
 
 async function insertScrapStatsPopup() {
     let newElement = new DOMParser().parseFromString('<div id="scrap-stats-popup"></div>', 'text/html').body.childNodes[0];
-    let micro_popup_url = chrome.runtime.getURL("micro_popup.html");
+    let add_scraper_popup_url = chrome.runtime.getURL("add_scraper_popup.html");
 
     document.querySelector("body").appendChild(newElement);
-    document.getElementById("scrap-stats-popup").innerHTML = await (await fetch(micro_popup_url)).text();
+    document.getElementById("scrap-stats-popup").innerHTML = await (await fetch(add_scraper_popup_url)).text();
     document.getElementById("scrap-stats-popup").querySelector("#add-scraper").addEventListener("click", addScraper);
 
     // set icon image
     let iconImage = document.getElementById("scrap-stats-popup").querySelector(".icon > img");
     iconImage.src = chrome.runtime.getURL("icon.png");
+
+    // inject css
+    var element = document.getElementById("scrap-stats-popup");
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = chrome.runtime.getURL("add_scraper_popup.css");
+    link.media = "all";
+    element.appendChild(link)
 
     MicroModal.init();
 }
@@ -65,13 +74,13 @@ function modalClose(modal) {
 }
 
 function activate() {
-    console.log("Scrap Stats Extension activated");
+    console.debug("Scrap Stats Extension activated");
     document.addEventListener("mousedown", selectElement);
     document.addEventListener("mouseover", overElement);
 }
 
 function deactivate() {
-    console.log("Scrap Stats Extension deactivated");
+    console.debug("Scrap Stats Extension deactivated");
     document.removeEventListener("mousedown", selectElement);
     document.removeEventListener("mouseover", overElement);
 
@@ -95,7 +104,7 @@ function commandReceived(message, sender, sendResponse) {
 }
 
 function addScraper() {
-    console.log("addScraper()");
+    console.debug("addScraper()");
 
     let modalElement = document.getElementById("scrap-stats-popup");
     let name = modalElement.querySelector("#name").innerHTML;

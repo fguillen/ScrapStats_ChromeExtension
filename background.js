@@ -1,1 +1,1 @@
-console.log("Scrap Stats background.js loading...")
+console.debug("Scrap Stats background.js loading...")

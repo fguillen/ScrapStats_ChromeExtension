@@ -12,7 +12,7 @@
         "matches": [
             "<all_urls>"
         ],
-        "css": ["style.css", "micromodal.css"],
+        "css": ["style.css"],
         "js": ["dist/bundle.js"]
     }],
     "background": {
@@ -24,6 +24,6 @@
     ],
     "web_accessible_resources": [{
         "matches": ["<all_urls>"],
-        "resources": ["micro_popup.html", "icon.png"]
+        "resources": ["add_scraper_popup.html", "add_scraper_popup.css", "icon.png"]
     }]
 }
