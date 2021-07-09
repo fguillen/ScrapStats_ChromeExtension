@@ -1,0 +1,2 @@
+- Add option for pre-click
+- Make it work with reddit votes
